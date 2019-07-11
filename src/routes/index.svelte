@@ -1,46 +1,80 @@
+<script>
+	import { UIButton, UIInput, Ripple, IconButton, Switch } from 'svelte-toolbox';
+
+	let value = "";
+	let darkMode = false;
+</script>
+
 <style>
-	h1, figure, p {
-		text-align: center;
-		margin: 0 auto;
+	div {
+		overflow: auto;
+	}
+	.left {
+		float: left;
+	}
+	.right {
+		float: right;
+		height: 48px;
+	}
+	.switch-text-container {
+		line-height: 48px;
+	}
+	.disabled {
+		opacity: 0.4;
+	}
+	.rounded {
+		border-radius: 3px;
 	}
 
-	h1 {
-		font-size: 2.8em;
-		text-transform: uppercase;
-		font-weight: 700;
-		margin: 0 0 0.5em 0;
-	}
-
-	figure {
-		margin: 0 0 1em 0;
-	}
-
-	img {
-		width: 100%;
-		max-width: 400px;
-		margin: 0 0 1em 0;
-	}
-
-	p {
-		margin: 1em auto;
-	}
-
-	@media (min-width: 480px) {
-		h1 {
-			font-size: 4em;
-		}
+	.switch-container {
+		max-width: 800px;
+		margin: auto;
+		padding: 5px 20px;
+		background-color: rgba(0, 0, 0, 0.1);
+		border-bottom: 0.1px solid rgba(0, 0, 0, 0.2)
 	}
 </style>
 
 <svelte:head>
-	<title>Sapper project template</title>
+    <title>Home</title>
 </svelte:head>
 
-<h1>Great success!</h1>
+{#if darkMode}
+	<style>
+		body {
+			background-color: rgba(0, 0, 0, 0.7);
+			color: white;
+		}
+	</style>
+{/if}
 
-<figure>
-	<img alt='Borat' src='great-success.png'>
-	<figcaption>HIGH FIVE!</figcaption>
-</figure>
+<UIButton block={true}>Button</UIButton>
 
-<p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
+<UIInput block={true} placeholder="Type something here" bind:value/>
+{value}
+<UIInput block={true} placeholder="Input Outlined" outlined={true}/>
+
+<Ripple>
+	<p>
+		There is a ripple effect here
+	</p>
+</Ripple>
+
+<div>
+	<IconButton icon="error"/>
+</div>
+
+<div class="rounded">
+	<div class="switch-container">
+		<span class="left switch-text-container">Dark Mode</span>
+		<span class="right">
+			<Switch bind:on={darkMode}/>
+		</span>
+	</div>
+	<div class="switch-container">
+		<span class="left switch-text-container disabled">Disabled Option</span>
+		<span class="right">
+			<Switch disabled={true}/>
+		</span>
+	</div>
+</div>
